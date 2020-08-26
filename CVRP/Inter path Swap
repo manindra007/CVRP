@@ -1,0 +1,41 @@
+def InterPathSwap(G,path1,pathlength1,capacity1,path2,pathlength2,capacity2,vertexCoordinates,allpairpathlength):
+	# print("HI")
+	path1cp=list(path1)
+	path2cp=list(path2)
+	pathres1=list(path1)
+	lenres1=pathlength1
+	capres1=capacity1
+	pathres2=list(path2)
+	lenres2=pathlength2
+	capres2=capacity2
+	for i in range(0,len(path1cp)):
+		for j in range(0,len(path2cp)):
+			# print(capacity1-vertexCoordinates[path1cp[i]].capacity+vertexCoordinates[path2cp[j]].capacity,capacity2+vertexCoordinates[path1cp[i]].capacity-vertexCoordinates[path2cp[j]].capacity)
+			if( capacity1-vertexCoordinates[path1cp[i]].capacity+vertexCoordinates[path2cp[j]].capacity<=G.capacity):
+				if(capacity2+vertexCoordinates[path1cp[i]].capacity-vertexCoordinates[path2cp[j]].capacity<=G.capacity):
+					path1cp[i],path2cp[j]=path2cp[j],path1cp[i]
+					a1=list(path1cp)
+					c1=capacity1-vertexCoordinates[path1cp[i]].capacity+vertexCoordinates[path2cp[j]].capacity
+					b1=interpathswapcost(G,path1cp,allpairpathlength)
+					a2=list(path2cp)
+					c2=capacity2+vertexCoordinates[path1cp[i]].capacity-vertexCoordinates[path2cp[j]].capacity
+					b2=interpathswapcost(G,path2cp,allpairpathlength)
+					# print(path1,path2,pathlength1,pathlength2)
+					# print(pathres1,pathres2,b1,b2)
+					# print(c1,c2,G.capacity)
+					if(b1+b2<lenres1+lenres2 and c1<G.capacity and c2<G.capacity):
+						lenres1=b1
+						lenres2=b2
+						pathres1=a1
+						pathres2=a2
+						capres1=c1
+						capres2=c2
+						# print(pathres1,pathres2)
+
+					path1cp[i],path2cp[j]=path2cp[j],path1cp[i]
+				# print(path1cp,path2cp)
+	if(pathres1 != path1 or pathres2!=path2 and lenres1<pathlength1 and lenres2<pathlength2):
+		return pathres1,pathres2,lenres1,lenres2,capres1,capres2,1
+		print(path1,path2,pathlength1,pathlength2)
+		print(pathres1,pathres2,b1,b2)
+	return path1,path2,pathlength1,pathlength2,capacity1,capacity2,0

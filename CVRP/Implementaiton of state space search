@@ -1,0 +1,26 @@
+def sss(G,path,sum,allpairpathlength,count):
+	# print(count)
+	if count == 0:
+		return path,sum
+
+	path1=list(path)
+	pathcp1=list(path)
+	sumcp1=sum
+	for i in range(0,len(path1)-1):
+		path1[i],path1[i+1]=path1[i+1],path1[i]
+		sum1=interpathswapcost(G,path1,allpairpathlength)
+		if(sumcp1>sum1):
+			sumcp1=sum1
+			pathcp1=path1
+		if(sum1<sum):
+			# print(i," ",end="")
+			# print(sum,sum1)
+			p1,s1=sss(G,path1,sum1,allpairpathlength,count)
+		else:
+			p1,s1=sss(G,path1,sum1,allpairpathlength,count-1)
+		if(s1<sumcp1):
+			pathcp1=p1
+			sumcp1=s1
+		path1[i],path1[i+1]=path1[i+1],path1[i]
+	# print(pathcp1,sumcp1)
+	return pathcp1,sumcp1

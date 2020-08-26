@@ -1,0 +1,12 @@
+def obtainapsp(allpairpathlength,vertexCoordinates):
+	for i in vertexCoordinates:
+		x1=vertexCoordinates[i].x
+		y1=vertexCoordinates[i].y
+		id1=vertexCoordinates[i].vertex_id
+		for j in vertexCoordinates:
+			x2=vertexCoordinates[j].x
+			y2=vertexCoordinates[j].y
+			if x1!=x2 or y1!=y2:
+				id2=vertexCoordinates[j].vertex_id
+				a=math.sqrt((x2-x1)**2+(y2-y1)**2)
+				allpairpathlength[str(id1)+"_"+str(id2)]=a

@@ -1,0 +1,26 @@
+def optimize(G,path,allpairpathlength,vertexCoordinates):
+	sum=0
+	t0= time.time()
+	for i in path:
+		# print(i[0],i[1])
+		p=1
+		# while p==1:
+			# p,i[0],i[1]=
+		i[0],i[1]=sss(G,i[0],i[1],allpairpathlength,2)
+		# print(i)
+		sum=sum+i[1]
+	
+	# print(type(path[0][0]),type(path[1][0]))
+	a=1
+	while(a):
+		a=0
+		for i in range(0,len(path)):
+			if(i==len(path)-1):
+				# print("last ",end="")
+				# print(type(path[i][0]),type(path[0][0]))
+				path[i][0],path[0][0],path[i][1],path[0][1],path[i][2],path[0][2],b=InterPathSwap(G,path[i][0],path[i][1],path[i][2],path[0][0],path[0][1],path[0][2],vertexCoordinates,allpairpathlength)
+			else:
+				path[i][0],path[i+1][0],path[i][1],path[i+1][1],path[i][2],path[i+1][2],b=InterPathSwap(G,path[i][0],path[i][1],path[i][2],path[i+1][0],path[i+1][1],path[i+1][2],vertexCoordinates,allpairpathlength)
+			a=a or b
+	t1= time.time()
+	print(t1-t0)

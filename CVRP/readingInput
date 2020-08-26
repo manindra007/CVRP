@@ -1,0 +1,56 @@
+def readInput(G,inputFile,vertexCoordinates):		#reading input from user
+	# reading minimum vehicle and optimal cost
+	inputFileList = inputFile.readlines()
+
+	dataFirstLine = []
+	#rptint(inputFileList)
+	currLine = inputFileList[1].split()
+	for i in currLine:
+		i = i.strip(',')
+		i = i.strip(')')
+		if(i.isdigit()):
+			dataFirstLine.append(i)
+	#print(int(dataFirstLine[0]+" "+dataFirstLine[1]))
+	G.minimumVehicle = int(dataFirstLine[0])
+	G.obtimalCost = int(dataFirstLine[1])
+	
+	# obtained minimum vehicle and optimal cost
+
+	#reading capacity
+	currLine = inputFileList[5].split()
+	for i in currLine:
+		if(i.isdigit()):
+			dataFirstLine.append(i) 
+
+	G.capacity = int(dataFirstLine[2])
+	#obtained capacity
+
+	#removing all the header text in the data file
+	inputFileList = inputFileList[7:]
+	
+	#reading coordinates of stops
+	for i in inputFileList:
+		if(i.split()[0]=="DEMAND_SECTION"):
+			break	
+		curr = i.split()
+		currId = int(curr[0])
+		currX = int(curr[1])
+		currY = int(curr[2])
+		currVertex = vertex(currId,currX,currY)
+		vertexCoordinates[currId] = currVertex #map with key as vertexId and value is the vertex
+
+	inputFileList = inputFileList[len(vertexCoordinates)+1:]
+
+	#obtained all the vertices and its coordinates
+	
+	#reading capacity for all vertices
+
+	for i in inputFileList:
+		if(i.split()[0]=="DEPOT_SECTION"):
+			break
+		curr = i.split()
+		vertexCoordinates[int(curr[0])].capacity = int(curr[1])
+
+	#capacity obtained
+	inputFileList=inputFileList[-3:]
+	G.depot=int(inputFileList[0])

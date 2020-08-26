@@ -1,0 +1,23 @@
+def obtainPath(res,G,vertexCoordinates,path,allpairpathlength):
+	path1={}
+	path2={}
+	# print(G.capacity)
+	getInitialSolution(res,G,vertexCoordinates,path,allpairpathlength)
+	# for i in path:
+	#  	print(i)
+	sum=0
+	for i in path:
+		sum+=i[1]
+		for j in range(0,len(i[0])):
+			print(i[0][j]," ",end="")
+			# sum=sum+allpairpathlength[(str(i[0][j])+"_"+str(i[0][j+1]))]
+		# print(sum)
+		print(i[1],sum,i[2])
+	print()
+	optimize(G,path,allpairpathlength,vertexCoordinates)
+	sum=0
+	for i in path:
+		sum+=i[1]
+		for j in range(0,len(i[0])):
+			print(i[0][j]," ",end="")
+		print(i[1],sum,i[2])

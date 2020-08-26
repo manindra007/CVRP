@@ -1,0 +1,24 @@
+def main():
+	inputFile = open(sys.argv[1],"r")
+	vertexCoordinates = {}
+	G = graphDetails()
+	readInput(G,inputFile,vertexCoordinates)
+	print("Minimum Vehicle = "+str(G.minimumVehicle)+" Obtimal Cost = "+str(G.obtimalCost)+" Capacity = "+str(G.capacity))
+	print(str(vertexCoordinates[2].x)+" "+str(vertexCoordinates[2].y))
+	print(str(G.depot))
+	angle={}
+	getAngle(angle,G,vertexCoordinates)
+	
+
+	distance = {}
+	distanceAngle={} #distance angle is dictionary where key is vertex id and value is (angle,distance)
+	getDistanceAngle(distanceAngle,G,vertexCoordinates)
+	
+	res = sorted(distanceAngle.items(), key = lambda kv:(kv[1][0], kv[1][1])) #res is a list with res[0] is vertex id, res[1][0] and res[1][1] is angle and distance wrt to depot
+	print("Sorted from here")
+	allpairpathlength={}
+	obtainapsp(allpairpathlength, vertexCoordinates)
+	path=[]
+	obtainPath(res,G,vertexCoordinates,path,allpairpathlength) #take parameter as required
+
+main()

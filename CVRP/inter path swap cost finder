@@ -1,0 +1,8 @@
+def interpathswapcost(G,path,allpairpathlength):
+	prev=G.depot
+	sumloc=0
+	for j in path:
+		sumloc=sumloc+allpairpathlength[str(prev)+"_"+str(j)]
+		prev=j
+	sumloc=sumloc+allpairpathlength[str(prev)+"_"+str(G.depot)]
+	return sumloc	

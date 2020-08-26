@@ -1,0 +1,15 @@
+def getAngle(angle,G,vertexCoordinates):
+	#print("finding angle")
+	print("angle")
+	x1=vertexCoordinates[G.depot].x
+	y1=vertexCoordinates[G.depot].y
+	print(str(x1)+" "+str(y1))
+	for i in vertexCoordinates:
+		id=vertexCoordinates[i].vertex_id
+		x2=vertexCoordinates[i].x
+		y2=vertexCoordinates[i].y
+		a=math.atan2(y2-y1,x2-x1)
+		b=math.degrees(a)
+		if(b<0):
+			b=360+b
+		angle[id]=b

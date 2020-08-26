@@ -1,0 +1,19 @@
+def getDistanceAngle(distanceAngle,G,vertexCoordinates):
+	print("distanceAngle")
+	x1=vertexCoordinates[G.depot].x  #should write vertexCoordinates[G.depot] the depot need not always be 1
+	y1=vertexCoordinates[G.depot].y
+	print(str(x1)+" "+str(y1))
+	for i in vertexCoordinates:
+		id=vertexCoordinates[i].vertex_id
+		x2=vertexCoordinates[i].x
+		y2=vertexCoordinates[i].y
+		a=math.atan2(y2-y1,x2-x1)
+		b=math.degrees(a)
+		if(b<0):
+			b=360+b
+		#angle[id]=b
+
+		d=math.sqrt((x2-x1)**2+(y2-y1)**2)
+		#print(a)
+		#distance[id]=d
+		distanceAngle[id]=[b,d]

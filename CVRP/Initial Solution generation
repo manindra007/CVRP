@@ -1,0 +1,56 @@
+def getInitialSolution(res,G,vertexCoordinates,path,allpairpathlength):
+	print("initial Solution")
+	path1={}
+	Veh_Cap=G.capacity
+	print("vehicle capacity =",type(Veh_Cap))
+	prev=res[0][0]
+	# for i in vertexCoordinates:
+	# 	print(i)
+	n=(len(res))
+	# create string1
+	s=[]
+	spl=[]
+	pathlength=0
+	# s.append(prev)
+	for i in range(1,n):
+		# print(pathlength,allpairpathlength[(str(prev)+"_"+str(res[i][0]))])
+		# print(type(vertexCoordinates[res[i][0]].capacity))
+		if(vertexCoordinates[res[i][0]].capacity<=Veh_Cap):
+			s.append(res[i][0])
+			pathlength=pathlength+allpairpathlength[(str(prev)+"_"+str(res[i][0]))]
+			prev=res[i][0]
+			# print(pathlength)
+			# print(res[i][1][1])
+			# append node in string1
+			Veh_Cap = Veh_Cap-vertexCoordinates[res[i][0]].capacity
+		else:
+			pathlength=pathlength+allpairpathlength[(str(prev)+"_"+str(res[0][0]))]
+			# s.append(res[0][0])
+			prev=res[0][0]
+			# print(s)
+			# print(pathlength)
+			spl.append(s)
+			# print(type(s))
+			spl.append(pathlength)
+			spl.append(G.capacity-Veh_Cap)
+			# print(type(spl[0][0]))
+			path.append(spl)
+			spl=[]
+			# print(path)
+			s=[]
+			# print(s)
+			# print(pathlength)
+			pathlength=0
+			# s.append(res[0][0])
+			s.append(res[i][0])
+			# append last vertex to string1-> append string1 to list-> make String1 empty and append first vertex-> append starting index to string-> append next vertex to string-> make veh_cap to G.capacity->reduce size of Veh_cap by capacity of current vertex
+			Veh_Cap=G.capacity
+			Veh_Cap=Veh_Cap-vertexCoordinates[res[i][0]].capacity
+	if(s!=str(prev)):
+		pathlength=pathlength+allpairpathlength[(str(prev)+"_"+str(res[0][0]))]
+		# s.append(res[0][0])
+		# path.append(s)
+		spl.append(s)
+		spl.append(pathlength)
+		spl.append(G.capacity-Veh_Cap)
+		path.append(spl)

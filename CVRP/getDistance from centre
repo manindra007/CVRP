@@ -1,0 +1,12 @@
+def getDistance(distance,G,vertexCoordinates):
+	print("distance")
+	x1=vertexCoordinates[G.depot].x
+	y1=vertexCoordinates[G.depot].y
+	print(str(x1)+" "+str(y1))
+	for i in vertexCoordinates:
+		id=vertexCoordinates[i].vertex_id
+		x2=vertexCoordinates[i].x
+		y2=vertexCoordinates[i].y
+		a=math.sqrt((x2-x1)**2+(y2-y1)**2)
+		#print(a)
+		distance[id]=a
